@@ -1,0 +1,77 @@
+<LockScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: 40
+        spacing: 20
+        MDLabel:
+            text: "MINE"
+            halign: "center"
+            font_style: "H4"
+        MDTextField:
+            id: code
+            hint_text: "Enter Passcode"
+            password: True
+        MDLabel:
+            id: msg
+            text: ""
+            halign: "center"
+        MDRaisedButton:
+            text: "Unlock"
+            pos_hint: {"center_x": .5}
+            on_release: root.try_unlock(code.text)
+
+<ChatScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        MDScrollView:
+            MDLabel:
+                id: chat_log
+                text: "MINE: Hey, I'm listening"
+                padding: 20, 20
+                size_hint_y: None
+                height: self.texture_size[1] + 40
+        MDIconButton:
+            icon: "microphone"
+            pos_hint: {"center_x": .5}
+            on_release: root.on_mic()
+
+<MeScreen>:
+    MDLabel:
+        text: "Me Screen"
+        halign: "center"
+
+<VaultScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            text: "Secure Vault - encrypted"
+            halign: "center"
+            size_hint_y: None
+            height: dp(48)
+        ScrollView:
+            MDList:
+                id: file_list
+
+<MainTabs>:
+    MDBottomNavigation:
+        MDBottomNavigationItem:
+            name: "chat"
+            text: "Chat"
+            icon: "microphone"
+            ChatScreen:
+        MDBottomNavigationItem:
+            name: "me"
+            text: "Me"
+            icon: "account"
+            MeScreen:
+        MDBottomNavigationItem:
+            name: "vault"
+            text: "Vault"
+            icon: "lock"
+            VaultScreen:
+
+ScreenManager:
+    LockScreen:
+        name: "lock"
+    MainTabs:
+        name: "main"
